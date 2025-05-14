@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            /* margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; */
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://media.istockphoto.com/id/1360866086/photo/pulmonologist-doctor-lungs-specialist-aesthetic-handdrawn-highlighted-illustration-of-human.jpg?s=612x612&w=0&k=20&c=NDpeYxuFfsg9j-Vh1jSl_5yDHnIelqAL2mCUC0geF4U='); 
+            background-size: cover; /* This ensures the image covers the entire body area */
+            background-position: center; /* Keeps the image centered */
+            background-repeat: no-repeat; /* Ensures the image does not repeat */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+            /* background-size: 100% 100%; Stretches the image to fill the entire width and height */
+            background-size: 1700px 3000px; /* Set the width and height to specific pixel values */
+
+        }
+
+        /* Header */
+        header {
+            background-color: #003300;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Form Container */
+        .form-container {
+            width: 60%;
+            margin: 40px auto;
+            background-color: #ccfff2;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #004d4d;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        td {
+            padding: 10px;
+            font-weight: bold;
+            color: rgb(82, 160, 82);
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 25px;
+            background-color: #009973;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #007a5e;
+        }
+
+        .genetic-marker-label {
+            color: #4CAF50; /* Color for the genetic marker label */
+            font-weight: bold;
+        }
+
+        .genetic-info {
+            color: #888; /* Color for the description */
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #003300;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        footer .socials {
+            margin-bottom: 1rem;
+        }
+
+        footer .socials img {
+            width: 30px;
+            margin: 0 0.5rem;
+            vertical-align: middle;
+        }
+
+        footer nav {
+            margin-bottom: 0.5rem;
+        }
+
+        footer nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <header>
+        <h1>COPD Risk Prediction</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/form">Prediction Form</a>
+            <a href="/support">Support</a>
+            <a href="/feedback">Feedback</a>
+        </nav>
+    </header>
+
+  
+    <div class="form-container">
+        <h2>Enter Information to Predict COPD Risk</h2>
+        <form action="/predict" method="POST">
+            <table>
+                <tr>
+                    <td>Sex (0 = Female, 1 = Male):</td>
+                    <td><input type="number" name="sex" step="1" min="0" max="1" required></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td><input type="number" name="age" step="any" required></td>
+                </tr>
+                <tr>
+                    <td>BMI:</td>
+                    <td><input type="number" name="bmi" step="any" required></td>
+                </tr>
+                <tr>
+                    <td>Smoking Status (0 = No, 1 = Yes):</td>
+                    <td><input type="number" name="smoke" step="1" min="0" max="1" required></td>
+                </tr>
+                <tr>
+                    <td>Location:</td>
+                    <td><input type="number" name="location" step="any" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs10007052:</span><br>
+                        <span class="genetic-info"><small><i>Inflammatory response gene marker</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs10007052" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs8192288:</span><br>
+                        <span class="genetic-info"><small><i>Linked to airway inflammation</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs8192288" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs20541:</span><br>
+                        <span class="genetic-info"><small><i>Interleukin-13 variant – allergy/asthma link</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs20541" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs12922394:</span><br>
+                        <span class="genetic-info"><small><i>Influences lung development</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs12922394" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs2910164:</span><br>
+                        <span class="genetic-info"><small><i>microRNA gene – immune gene expression</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs2910164" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs161976:</span><br>
+                        <span class="genetic-info"><small><i>May affect oxidative stress</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs161976" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs473892:</span><br>
+                        <span class="genetic-info"><small><i>Expressed in respiratory cells</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs473892" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs159497:</span><br>
+                        <span class="genetic-info"><small><i>Linked to chronic lung inflammation</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs159497" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="genetic-marker-label">rs9296092:</span><br>
+                        <span class="genetic-info"><small><i>Affects mucous production in lungs</i></small></span>
+                    </td>
+                    <td>
+                        <select name="rs9296092" required>
+                            <option value="0">0 - AA</option>
+                            <option value="1">1 - AG</option>
+                            <option value="2">2 - GG</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+
+           
+            <input type="submit" value="Predict" class="submit-btn">
+        </form>     
+    </div>
+    <!-- <table class="info-box" style="margin-top: 30px; background-color: #f0f9ff; border: 1px solid #cce6ff; padding: 20px; border-radius: 10px;"> -->
+        <table class="info-box" style="margin-top: 30px; background-color: #f0f9ff; border: 1px solid #cce6ff; padding: 20px; border-radius: 10px; width: 80%;">   
+        <tr>
+            <td>
+                <h2 style="color: #004466;">🧬 Understanding Genetic Markers for COPD Prediction</h2>
+        
+                <p><strong>What are Genetic Markers?</strong><br>
+                Genetic markers are specific sequences in your DNA that can vary from person to person. These variations, known as <em>Single Nucleotide Polymorphisms (SNPs)</em>, may influence your health. Our model uses 9 key SNPs related to inflammation, immune response, and lung function, which can affect your chances of developing <strong>Chronic Obstructive Pulmonary Disease (COPD)</strong>.</p>
+        
+                <h3 style="color: #005580;">🔍 How Do You Know Your Genetic Marker Values?</h3>
+                <ul>
+                    <li>If you've done a DNA test from 23andMe, AncestryDNA, MyHeritage, or any clinical test, you can download your raw genetic data as a text or CSV file.</li>
+                    <li>Use tools like <a href="https://promethease.com" target="_blank">Promethease</a> or <a href="https://codegen.eu/" target="_blank">Codegen</a> to analyze the raw data.</li>
+                    <li>Search for the SNP (e.g., <code>rs20541</code>) in your raw data. You'll see values like <code>AA</code>, <code>AG</code>, or <code>GG</code>.</li>
+                </ul>
+        
+                <h3 style="color: #005580;">🧾 How to Select the Right Option</h3>
+                <p>For each SNP input in the form, choose based on your genotype:</p>
+                <ul>
+                    <li><strong>0 = AA</strong> (homozygous for A allele)</li>
+                    <li><strong>1 = AG</strong> (heterozygous — one A, one G)</li>
+                    <li><strong>2 = GG</strong> (homozygous for G allele)</li>
+                </ul>
+                <p>If you find a different combination like <code>CT</code> or <code>TC</code>, treat it the same way: pick 0 (both same), 1 (mixed), or 2 (both other base).</p>
+        
+                <h3 style="color: #004466;">🧬 Details of Each Genetic Marker</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="background-color: #e0f2ff;">
+                        <th style="padding: 10px; border: 1px solid #b3daff;">Marker</th>
+                        <th style="padding: 10px; border: 1px solid #b3daff;">Function</th>
+                        <th style="padding: 10px; border: 1px solid #b3daff;">Relevance to COPD</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs10007052</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Inflammatory gene variant</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">May trigger abnormal immune responses in the lungs.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs8192288</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">IL4 receptor region</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Associated with airway inflammation and allergic reactions.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs20541</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">IL13 gene variant</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Linked to asthma-like symptoms and increased mucus production.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs12922394</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Developmental gene</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Influences lung structure during early development.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs2910164</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">microRNA gene</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Controls immune gene regulation; variant may affect lung healing.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs161976</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Oxidative stress-related gene</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">May reduce lung cell resistance to pollution or smoke.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs473892</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Lung cell expression</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Affects gene expression in lung epithelial tissues.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs159497</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Chronic inflammation marker</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Linked with long-term lung tissue damage and scarring.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">rs9296092</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Mucin production gene</td>
+                        <td style="padding: 10px; border: 1px solid #cce6ff;">Affects mucus production which may block airways in COPD patients.</td>
+                    </tr>
+                </table>
+        
+                <p style="margin-top: 15px;"><strong>⚠️ If you don’t know your genetic data:</strong><br>
+                You can either leave the fields default or use professional help to get your DNA analyzed. The prediction will still work, but results may be less accurate.</p>
+        
+                <h3 style="color: #005580;">🌐 Resources to Check Your Genetics</h3>
+                <p>If you don't have genetic data but are interested in understanding your genetic predispositions, here are some resources you can use:</p>
+                <ul>
+                    <li><strong><a href="https://promethease.com" target="_blank">Promethease</a></strong> — Analyze your raw DNA data to discover genetic traits and disease risks.</li>
+                    <li><strong><a href="https://codegen.eu/" target="_blank">Codegen</a></strong> — Another platform to analyze raw genetic data and see health-related insights.</li>
+                    <li><strong><a href="https://www.snpedia.com/" target="_blank">SNPedia</a></strong> — Search for individual SNPs to learn about their health implications.</li>
+                    <li><strong><a href="https://www.mygenome.info/" target="_blank">MyGenome</a></strong> — Provides insights into genetic risks and traits.</li>
+                    <li><strong><a href="https://www.familytreedna.com/" target="_blank">FamilyTreeDNA</a></strong> — Explore your genetic roots and potential genetic risks.</li>
+                </ul>
+        
+                <h4 style="color: #004466;">How to Interpret Your Genetic Data:</h4>
+                <p>If you’ve done a DNA test through services like 23andMe or AncestryDNA, you can download your raw genetic data and upload it to platforms like Promethease. These tools will give you detailed reports based on specific genetic markers.</p>
+                <p>Once you have the results, you can return to this page and choose the relevant options for each genetic marker (e.g., AA, AG, GG) in the COPD prediction form.</p>
+            </td>
+        </tr>
+    </table>
+    
+  
+    <footer>
+        <div class="socials">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter--v1.png" alt="Twitter"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        <p>&copy; 2025 COPD Predictor | All rights reserved</p>
+    </footer>
+
+</body>
+</html> 
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://media.istockphoto.com/id/1360866086/photo/pulmonologist-doctor-lungs-specialist-aesthetic-handdrawn-highlighted-illustration-of-human.jpg?s=612x612&w=0&k=20&c=NDpeYxuFfsg9j-Vh1jSl_5yDHnIelqAL2mCUC0geF4U='); 
+            background-size: 1700px 1300px;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+
+        header {
+            background-color: #003300;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .form-container {
+            width: 60%;
+            margin: 40px auto;
+            background-color: #ccfff2;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #004d4d;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        td {
+            padding: 10px;
+            font-weight: bold;
+            color: rgb(82, 160, 82);
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 25px;
+            background-color: #009973;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #007a5e;
+        }
+
+        .genetic-marker-label {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .genetic-info {
+            color: #888;
+            font-style: italic;
+        }
+
+        .info-box {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 5px solid #388e3c;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .info-box h3 {
+            color: #2e7d32;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #003300;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        footer .socials {
+            margin-bottom: 1rem;
+        }
+
+        footer .socials img {
+            width: 30px;
+            margin: 0 0.5rem;
+            vertical-align: middle;
+        }
+
+        footer nav {
+            margin-bottom: 0.5rem;
+        }
+
+        footer nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>COPD Risk Prediction</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/form">Prediction Form</a>
+            <a href="/support">Support</a>
+            <a href="/feedback">Feedback</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>Enter Information to Predict COPD Risk</h2>
+        <form action="/predict" method="POST">
+            <table>
+                <tr>
+                    <td>Sex:</td>
+                    <td>
+                        <select name="sex" required>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td><input type="number" name="age" required></td>
+                </tr>
+                <tr>
+                    <td>BMI:</td>
+                    <td><input type="number" step="0.01" name="bmi" required></td>
+                </tr>
+                <tr>
+                    <td>Smoking Status:</td>
+                    <td>
+                        <select name="smoke" required>
+                            <option value="0">Non-smoker</option>
+                            <option value="1">Smoker</option>
+                        </select>
+                    </td>
+                </tr>
+
+               
+                <tr><td colspan="2" class="genetic-marker-label">Genetic Markers (Select 0=AA, 1=AG, 2=GG):</td></tr>
+
+                <tr><td>rs10007052:</td><td><select name="rs10007052"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs8192288:</td><td><select name="rs8192288"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs20541:</td><td><select name="rs20541"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs12922394:</td><td><select name="rs12922394"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs2910164:</td><td><select name="rs2910164"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs161976:</td><td><select name="rs161976"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs473892:</td><td><select name="rs473892"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs159497:</td><td><select name="rs159497"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+                <tr><td>rs9296092:</td><td><select name="rs9296092"><option value="0">AA</option><option value="1">AG</option><option value="2">GG</option></select></td></tr>
+            </table>
+
+            <button class="submit-btn" type="submit">Predict</button>
+        </form>
+    </div>
+
+    <div class="info-box">
+        <h3>How to Select Genetic Marker Options</h3>
+        <p>Each genetic marker (e.g., <strong>rs10007052</strong>, <strong>rs20541</strong>) represents a variation in your DNA that may impact your risk of COPD. You must select one of the three options for each marker:</p>
+        <ul>
+            <li><strong>0 - AA</strong>: You have two 'A' alleles.</li>
+            <li><strong>1 - AG</strong>: You have one 'A' and one 'G' allele (heterozygous).</li>
+            <li><strong>2 - GG</strong>: You have two 'G' alleles.</li>
+        </ul>
+        <p>These values can be obtained from your genetic testing report (e.g., 23andMe, AncestryDNA, or a clinical test). If unsure, consult your healthcare provider or skip prediction until you have this data.</p>
+
+        <h4>Why These Markers?</h4>
+        <ul>
+            <li><strong>rs10007052</strong>: Inflammatory response gene</li>
+            <li><strong>rs8192288</strong>: Linked to airway inflammation</li>
+            <li><strong>rs20541</strong>: Related to asthma/allergy susceptibility</li>
+            <li><strong>rs12922394</strong>: Affects lung development</li>
+            <li><strong>rs2910164</strong>: Involved in immune gene regulation</li>
+            <li><strong>rs161976</strong>: May impact oxidative stress</li>
+            <li><strong>rs473892</strong>: Expressed in respiratory cells</li>
+            <li><strong>rs159497</strong>: Related to chronic lung inflammation</li>
+            <li><strong>rs9296092</strong>: Impacts mucus production in lungs</li>
+        </ul>
+        <p>Choosing accurate values for these markers improves prediction reliability.</p>
+    </div>
+
+    <footer>
+        <div class="socials">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter--v1.png" alt="Twitter"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></a>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        <p>&copy; 2025 COPD Predictor | All rights reserved</p>
+    </footer>
+
+</body>
+</html> -->

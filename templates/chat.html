@@ -1,0 +1,29 @@
+<html>
+<body>
+    <h1>Chat with COPD Assistant</h1>
+    <form id="chatForm">
+        <input type="text" id="userMessage" placeholder="Ask me anything about COPD" required>
+        <button type="submit">Send</button>
+    </form>
+    <div id="chatResponse"></div>
+
+    <script>
+        document.getElementById("chatForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const userMessage = document.getElementById("userMessage").value;
+            fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("chatResponse").innerText = data.reply;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>

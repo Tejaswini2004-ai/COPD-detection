@@ -1,0 +1,136 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+.landing-bg {
+    background: url('bg-grid.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.form-bg {
+    background: linear-gradient(to right, #141e30, #243b55);
+}
+
+.result-bg {
+    background: linear-gradient(to right, #232526, #414345);
+}
+
+.container {
+    padding: 50px;
+}
+
+.button-group {
+    margin-top: 40px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 18px;
+    margin: 15px;
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.orange { background-color: #ff6600; }
+.yellow { background-color: #f4c542; }
+.cyan { background-color: #00bcd4; }
+.purple { background-color: #9c27b0; }
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 40px;
+    background: rgba(0,0,0,0.7);
+    border-radius: 20px;
+    margin-top: 40px;
+}
+
+.form-grid input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+.result-container {
+    padding: 50px;
+}
+
+.result-text {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+
+
+
+/* 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.landing-bg {
+    background: linear-gradient(to right, #84fab0, #8fd3f4);
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.form-bg, .result-bg {
+    background: #f0f4f8;
+    padding: 50px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.logo {
+    width: 150px;
+    margin-bottom: 30px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 25px;
+    margin: 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.orange { background-color: #f57c00; }
+.yellow { background-color: #fdd835; color: black; }
+.cyan { background-color: #00bcd4; }
+.green { background-color: #4caf50; }
+.result-box p { font-size: 20px; } */
