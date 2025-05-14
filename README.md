@@ -1,1 +1,1 @@
-# COPD-detection
+# COPD
